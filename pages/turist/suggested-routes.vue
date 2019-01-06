@@ -27,16 +27,17 @@
   </section>
 
 
-
 </template>
 
 <script>
-  // import routesService from '../../server/services/routesService'
+  import routesService from '../../server/services/routesService'
 
   export default {
-    // async asyncData() {
-    //   return {suggestedRoutes: await routesService.getSuggestedRoutes()}
-    // },
+    async asyncData() {
+      if (process.server) {
+        return {suggestedRoutes: await routesService.getSuggestedRoutes()}
+      }
+    },
     name: "suggestedRoutesPage",
     data: () => ({
       routeDescription: null
@@ -64,7 +65,7 @@
     margin-bottom: 20px;
   }
 
-  .route-description{
+  .route-description {
     min-height: 300px;
   }
 </style>
