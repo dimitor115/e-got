@@ -30,17 +30,17 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import {fetchData} from "~/assets/utils";
 
   export default {
-    async asyncData() {
-      return {suggestedRoutes: (await axios.get('http://127.0.0.1:3000/api/routes')).data}
-
-    },
     name: "suggestedRoutesPage",
     data: () => ({
-      routeDescription: null
+      routeDescription: null,
+      suggestedRoutes: []
     }),
+    async mounted() {
+      this.suggestedRoutes = await fetchData('/routes')
+    },
     methods: {
       showDescription(description) {
         this.routeDescription = description

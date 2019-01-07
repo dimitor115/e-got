@@ -3,6 +3,7 @@ const express = require('express')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 const api = require('./apiController')
+const mongo = require('./mongoDB')
 
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
@@ -23,6 +24,8 @@ async function start() {
     const builder = new Builder(nuxt)
     await builder.build()
   }
+
+  mongo.connect()
 
   app.use('/api', api)
   // Give nuxt middleware to express
