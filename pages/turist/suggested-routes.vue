@@ -30,13 +30,12 @@
 </template>
 
 <script>
-  import routesService from '../../server/services/routesService'
+  import axios from 'axios'
 
   export default {
     async asyncData() {
-      if (process.server) {
-        return {suggestedRoutes: await routesService.getSuggestedRoutes()}
-      }
+      return {suggestedRoutes: (await axios.get('http://127.0.0.1:3000/api/routes')).data}
+
     },
     name: "suggestedRoutesPage",
     data: () => ({

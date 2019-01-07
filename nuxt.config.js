@@ -50,6 +50,9 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
+  serverMiddleware: [
+    '~/server/protoMiddlewear.js'
+  ],
 
   /*
   ** Build configuration
@@ -59,7 +62,7 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
-      
+
     }
   }
 }

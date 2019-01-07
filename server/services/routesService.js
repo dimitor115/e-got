@@ -1,9 +1,10 @@
-import mongoClient from '../mongoDB.js'
+const mongoClient = require('../mongoDB.js')
+
 class RoutesService {
-  async getSuggestedRoutes() {
-   const mongo = await mongoClient()
-    return mongo.routes.find({}).toArray()
+  async getSuggestedRoutes(req, res) {
+    const mongo = await mongoClient()
+    res.send(await mongo.routes.find({}).toArray())
   }
 }
 
-export default new RoutesService()
+module.exports = new RoutesService()
