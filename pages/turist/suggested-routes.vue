@@ -1,5 +1,6 @@
 <template>
   <section class="container">
+    
     <div v-for="(route, idx) in suggestedRoutes">
       <b-card :title="route.title"
               :img-src="'https://picsum.photos/600/300/?image='+idx + 10"

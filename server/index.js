@@ -2,8 +2,8 @@
 const express = require('express')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
-const api = require('./apiController')
-const mongo = require('./mongoDB')
+const api = require('./api')
+const mongo = require('../assets/mongoDB')
 
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
