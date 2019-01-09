@@ -8,8 +8,16 @@
       <b-table stacked :fields="displayFields" :items="evidenceDisplay"></b-table>
 
       <div>
-        <b-button variant="outline-danger" size="lg">Odrzuć</b-button>
-        <b-button variant="success" size="lg">Zatwierdź</b-button>
+        <b-button variant="outline-danger"
+                  size="lg"
+                  @click="updateEvidenceStatus(false)">
+          Odrzuć
+        </b-button>
+        <b-button variant="success"
+                  size="lg"
+                  @click="updateEvidenceStatus(true)">
+          Zatwierdź
+        </b-button>
       </div>
     </loader>
   </div>
@@ -17,7 +25,7 @@
 
 <script>
   import axios from "axios";
-  import {fetchData} from "../../assets/utils";
+  import {fetchData, apiUrl} from "../../assets/utils";
   import Loader from "../../components/loader";
 
   export default {
@@ -51,6 +59,14 @@
         } else {
           return []
         }
+      }
+    },
+    methods: {
+      updateEvidenceStatus(status) {
+        const id = this.evidence._id
+        axios.put(`${apiUrl()}/evidences/${id}`, {approved: status})
+          .then(()=>this.$router.push('/verificator/evidences-list'))
+          .catch(err => alert(err))
       }
     },
     async mounted() {

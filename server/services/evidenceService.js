@@ -10,7 +10,7 @@ class EvidenceService {
       track: trackId,
       author: "build_in_turist",
       photo: payload.sectionPhoto,
-      approved: false,
+      approved: null,
       additionDate: Date()
     }
     const result = await mongo.evidences.insertOne(evidence)
@@ -37,7 +37,7 @@ class EvidenceService {
   async verificatorEvidences() {
     console.log("-> verificator evidences")
     return (await mongo.evidences
-      .find({}).toArray())
+      .find({approved: null}).toArray())
       .map(y => {
         y.photo = null;
         return y

@@ -13,7 +13,10 @@
           ptk: <b-badge> {{track.points }}</b-badge>
         </span>
           <span>
-          status:   <b-badge variant="warning">Niezatwierdzony</b-badge>
+          status:
+            <b-badge :variant="mapEvidenceStatusVariant(track)">
+              {{mapEvidenceStatusText(track)}}
+            </b-badge>
         </span>
           <span style="float: right">
           <b-button size="sm" variant="danger" @click="showRemoveConfirmation(track)">Usuń</b-button>
@@ -55,6 +58,26 @@
       isRequestProcessing: true
     }),
     methods: {
+      mapEvidenceStatusVariant(evidence) {
+        switch (evidence.approved) {
+          case false:
+            return "danger";
+          case true:
+            return "success";
+          default:
+            return "warning";
+        }
+      },
+      mapEvidenceStatusText(evidence) {
+        switch (evidence.approved) {
+          case false:
+            return "Odrzucony";
+          case true:
+            return "Zaakceptowany";
+          default:
+            return "Niezatwierdzony";
+        }
+      },
       removeTrack() {
         try {
           const id = this.trackToRemove._id
@@ -89,11 +112,13 @@
     flex-direction: column;
     margin-top: 20px
   }
+
   .tracks-list {
     display: flex;
     justify-content: center;
     flex-direction: column;
   }
+
   .tracks-list > * {
     margin-bottom: 20px;
   }

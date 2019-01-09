@@ -1,33 +1,39 @@
 <template>
   <div class="container">
-    <b-card v-for="(evidence, index) in evidences"
-            :key="index"
-            style="background-color: #f7f8fb"
-            class="text-center">
+    <loader class="evidences-list" :is-processing="!areEvidencesFetched">
+      <b-card v-for="(evidence, index) in evidences"
+              :key="index"
+              style="background-color: #f7f8fb"
+              class="text-center">
       <span class="card-info">
         <li>Kamieńczyk - Zakpane</li>
-        <li>Asia Warchulska</li>
+        <li>{{evidence.author}}</li>
       </span>
-      <span>
+        <span>
         <b-button :to='"/verificator/evidence-confirmation#" + evidence._id' variant="primary">
           Szczegóły
         </b-button>
       </span>
-    </b-card>
+      </b-card>
+    </loader>
   </div>
 </template>
 
 
 <script>
   import {fetchData} from "../../assets/utils";
+  import Loader from "../../components/loader";
 
   export default {
     name: "confirmSectionPage",
+    components: {Loader},
     data: () => ({
-      evidences: []
+      evidences: [],
+      areEvidencesFetched: false
     }),
     async mounted() {
       this.evidences = await fetchData("/evidences/verificator")
+      this.areEvidencesFetched = true
     }
   }
 </script>
@@ -42,7 +48,13 @@
     flex-direction: column;
   }
 
-  .container > * {
+  .evidences-list {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .evidences-list > * {
     margin-bottom: 20px;
   }
 
