@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="section-form">
+    <div class="evidence-form">
       <b-form-group label="Grupa górska:"
                     description="Wybierz obszar po którym podróżowałeś">
         <b-form-select :options="mountainGroups">
@@ -24,17 +24,17 @@
         <b-form-file @change="readAndRenderPhoto" placeholder="Choose a file..."></b-form-file>
       </b-form-group>
 
-      <b-jumbotron v-if="documentation.sectionPhoto">
+      <b-jumbotron v-if="evidence.sectionPhoto">
         <b-img
           class="photo-preview"
-          :src="documentation.sectionPhoto">
+          :src="evidence.sectionPhoto">
         </b-img>
       </b-jumbotron>
     </div>
     <b-button size="lg"
               style="margin-top: 40px"
               variant="outline-primary"
-              @click="addNewSectionDocumentation">
+              @click="postTrackEvidence">
       Dodaj odcinek do zatwierdzenia
     </b-button>
 
@@ -48,7 +48,7 @@
   export default {
     name: "DocumentNewSectionModal",
     data: () => ({
-      documentation: {
+      evidence: {
         sectionPhoto: null,
         startPoint: null,
         endPoint: null
@@ -63,20 +63,20 @@
       ]
     }),
     methods: {
-      addNewSectionDocumentation() {
-        axios.post(`${apiUrl()}/documentation`, this.documentation)
+      postTrackEvidence() {
+        axios.post(`${apiUrl()}/evidence`, this.evidence)
           .then(test => {
             console.log(test)
           })
           .catch(err => {
-            console.log(err)
+            console.log("err",err)
           })
       },
       readAndRenderPhoto(event) {
         const file = event.srcElement.files[0]
         const reader = new FileReader()
         reader.onload = () => {
-          this.documentation.sectionPhoto = reader.result
+          this.evidence.sectionPhoto = reader.result
         }
         if (file) {
           reader.readAsDataURL(file)
@@ -96,7 +96,7 @@
     flex-direction: column;
   }
 
-  .section-form > * {
+  .evidence-form > * {
     max-width: 30em;
     min-width: 20em;
   }

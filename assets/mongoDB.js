@@ -6,7 +6,7 @@ class MongoService {
     console.log('Mongo connected !')
 
     this.routes = client.collection('routes')
-    this.sectionDocumentations = client.collection('section-documentation')
+    this.evidences = client.collection('evidences')
     console.log('Collection imported')
   }
 }

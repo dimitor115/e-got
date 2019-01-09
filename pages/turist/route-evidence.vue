@@ -1,38 +1,38 @@
 <template>
   <div class="container">
-    <b-card v-for="(section, index) in fetchSections"
+    <b-card v-for="(track, index) in fetchedTracks"
             :key="index"
-            :title="section.startPoint + '-' +section.endPoint"
+            :title="track.startPoint + '-' +track.endPoint"
             style="max-width: 30rem;"
             img-src="https://placekitten.com/1000/300"
             img-alt="Card image"
             img-top>
       <div>
         <span style="float:left">
-          ptk: <b-badge> {{section.points }}</b-badge>
+          ptk: <b-badge> {{track.points }}</b-badge>
         </span>
         <span>
           status:   <b-badge variant="warning">Niezatwierdzony</b-badge>
         </span>
         <span style="float: right">
-          <b-button size="sm" variant="danger" @click="showRemoveConfirmation(section)">Usuń</b-button>
+          <b-button size="sm" variant="danger" @click="showRemoveConfirmation(track)">Usuń</b-button>
         </span>
       </div>
     </b-card>
 
     <b-button size="lg"
               variant="outline-primary"
-              to="/turist/document-new-section">
+              to="/turist/track-evidence-form">
       Dodaj odcinek do zatwierdzenia
     </b-button>
 
     <b-modal
       ref="removeModal"
       centered
-      @ok="removeSection"
+      @ok="removeTrack"
       title="Potwierdź usunięcie">
-      <p v-if="sectionToRemove">
-        Jesteś pewnien, że chcesz usunąć trasę {{sectionToRemove.startPoint}} - {{sectionToRemove.endPoint}}
+      <p v-if="trackToRemove">
+        Jesteś pewnien, że chcesz usunąć trasę {{trackToRemove.startPoint}} - {{trackToRemove.endPoint}}
       </p>
     </b-modal>
 
@@ -40,14 +40,12 @@
 </template>
 
 <script>
-  import DocumentNewSectionModal from "./document-new-section";
 
   export default {
-    name: "section-documentation",
-    components: {DocumentNewSectionModal},
+    name: "route-evidence",
     data: () => ({
-      sectionToRemove: null,
-      fetchSections: [
+      trackToRemove: null,
+      fetchedTracks: [
         {
           photo: null,
           startPoint: "Kamieńczyk",
@@ -69,14 +67,11 @@
       ]
     }),
     methods: {
-      showAddSectionModal() {
-        this.$refs.newSectionModal.show()
-      },
-      removeSection() {
+      removeTrack() {
         console.log('remove secion')
       },
-      showRemoveConfirmation(section) {
-        this.sectionToRemove = section
+      showRemoveConfirmation(track) {
+        this.trackToRemove = track
         this.$refs.removeModal.show()
       }
     }

@@ -28,6 +28,11 @@ async function start() {
 
   mongo.connect()
 
+  app.use(bodyParser.json({
+    parameterLimit: 100000,
+    limit: '50mb',
+    extended: true
+  }))
   app.use(bodyParser.json())
   app.use('/api', api)
   // Give nuxt middleware to express

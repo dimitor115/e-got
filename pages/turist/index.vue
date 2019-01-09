@@ -3,7 +3,7 @@
     <div class="start-page">
       <img class="logo" src="/turist.png"/>
       <b-button to="/turist/suggested-routes" variant="outline-success" size="lg">Zobacz proponowane trasy</b-button>
-      <b-button to="/turist/section-documentation" variant="outline-success" size="lg">Dodaj przebytą trasę</b-button>
+      <b-button to="/turist/route-evidence" variant="outline-success" size="lg">Dodaj przebytą trasę</b-button>
     </div>
   </section>
 </template>

@@ -1,7 +1,7 @@
 const mongo = require('../../assets/mongoDB.js')
 
-class DocumentationService {
-  async addNewDocumentation(req, res) {
+class EvidenceService {
+  async addEvidence(req, res) {
     const payload = req.body
     const trackId = await getTrackId(payload)
     const evidence = {
@@ -11,7 +11,7 @@ class DocumentationService {
       approved: false,
       additionDate: Date()
     }
-    const result = await mongo.sectionDocumentations.insertOne(evidence)
+    const result = await mongo.evidences.insertOne(evidence)
     if(result.insertedCount === 1) {
       res.status(201).send()
     } else {
@@ -20,7 +20,7 @@ class DocumentationService {
   }
 }
 
-module.exports = new DocumentationService()
+module.exports = new EvidenceService()
 
 async function getTrackId(payload) {
   return await {_id:32424}
