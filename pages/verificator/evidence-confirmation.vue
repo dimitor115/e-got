@@ -1,26 +1,61 @@
 <template>
   <div class="container">
-    aoisdjoaisjdoa <br>
-    <img v-if="evidence" v-gallery :src="evidence.photo">
+    <loader :is-processing="!isEvidenceDownloaded">
+      <img v-if="evidence"
+           style="max-width: 20em"
+           v-gallery
+           :src="evidence.photo">
+      <b-table stacked :fields="displayFields" :items="evidenceDisplay"></b-table>
+
+      <div>
+        <b-button variant="outline-danger" size="lg">Odrzuć</b-button>
+        <b-button variant="success" size="lg">Zatwierdź</b-button>
+      </div>
+    </loader>
   </div>
 </template>
 
 <script>
   import axios from "axios";
   import {fetchData} from "../../assets/utils";
+  import Loader from "../../components/loader";
 
   export default {
     name: "evidence-confirmation",
+    components: {Loader},
     data: () => ({
-      evidence: null
+      isEvidenceDownloaded: false,
+      evidence: null,
+      test: [{aaa: "sadsad", maciek: "asdasd"}],
+      displayFields: [
+        {key: "startPoint", label: "Punkt początkowy"},
+        {key: "endPoint", label: "Punkt końcowy"},
+        {key: "author", label: "Turysta"},
+        {key: "additionDate", label: "Dodane"}
+      ]
     }),
     computed: {
       evidenceId() {
         return document.URL.slice(document.URL.indexOf('#', 10) + 1)
+      },
+      evidenceDisplay() {
+        if (this.evidence) {
+          return [
+            {
+              startPoint: "Kamieńczyk",
+              endPoint: "Zakopane",
+              author: this.evidence.author,
+              additionDate: this.evidence.additionDate
+            }
+          ]
+        } else {
+          return []
+        }
       }
     },
     async mounted() {
       this.evidence = await fetchData(`/evidences/${this.evidenceId}`)
+      this.isEvidenceDownloaded = true
     }
   }
 </script>
