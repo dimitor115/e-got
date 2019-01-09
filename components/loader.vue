@@ -1,16 +1,15 @@
 <template>
-  <section >
-    <div v-if="isProcessing">
+  <div>
+    <div v-if="isProcessing" :class="{wrapper: isProcessing}">
       <div class="loader-loading">
         <span></span>
       </div>
-      <p> Wczytuję... </p>
     </div>
-      <template v-else>
-        <slot></slot>
-      </template>
+    <template v-else>
+      <slot></slot>
+    </template>
 
-  </section>
+  </div>
 </template>
 
 <script>
@@ -31,6 +30,7 @@
     justify-content: center;
     margin-bottom: 14em;
   }
+
   .loader-loading {
     font-size: 20px;
     width: 8em;

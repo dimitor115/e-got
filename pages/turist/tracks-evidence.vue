@@ -1,24 +1,26 @@
 <template>
   <div class="container">
-    <b-card v-for="(track, index) in fetchedTracks"
-            :key="index"
-            :title="track.startPoint + '-' +track.endPoint"
-            style="max-width: 30rem;"
-            :img-src="track.photo"
-            img-alt="Card image"
-            img-top>
-      <div>
+    <loader class="tracks-list" :is-processing="isRequestProcessing">
+      <b-card v-for="(track, index) in fetchedTracks"
+              :key="index"
+              :title="track.startPoint + '-' +track.endPoint"
+              style="max-width: 30rem;"
+              :img-src="track.photo"
+              img-alt="Card image"
+              img-top>
+        <div>
         <span style="float:left">
           ptk: <b-badge> {{track.points }}</b-badge>
         </span>
-        <span>
+          <span>
           status:   <b-badge variant="warning">Niezatwierdzony</b-badge>
         </span>
-        <span style="float: right">
+          <span style="float: right">
           <b-button size="sm" variant="danger" @click="showRemoveConfirmation(track)">Usuń</b-button>
         </span>
-      </div>
-    </b-card>
+        </div>
+      </b-card>
+    </loader>
 
     <b-button size="lg"
               variant="outline-primary"
@@ -42,12 +44,15 @@
 <script>
   import {fetchData, apiUrl} from "../../assets/utils";
   import axios from "axios"
+  import Loader from "../../components/loader";
 
   export default {
     name: "route-evidence",
+    components: {Loader},
     data: () => ({
       trackToRemove: null,
-      fetchedTracks: []
+      fetchedTracks: [],
+      isRequestProcessing: true
     }),
     methods: {
       removeTrack() {
@@ -64,7 +69,9 @@
         this.$refs.removeModal.show()
       },
       async fetchTracks() {
+        this.isRequestProcessing = true
         this.fetchedTracks = await fetchData('/evidences/tourist')
+        this.isRequestProcessing = false
       }
     },
     async mounted() {
@@ -80,9 +87,14 @@
     justify-content: center;
     text-align: center;
     flex-direction: column;
+    margin-top: 20px
   }
-
-  .container > * {
+  .tracks-list {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .tracks-list > * {
     margin-bottom: 20px;
   }
 </style>
