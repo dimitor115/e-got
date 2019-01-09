@@ -17,6 +17,7 @@
     "bootstrap-vue": "^2.0.0-beta",
     "cross-env": "^5.2.0",
     "express": "^4.16.3",
+    "img-vuer": "^0.15.5",
     "mongodb": "^3.1.10",
     "nuxt": "^2.0.0"
   },

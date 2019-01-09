@@ -9,7 +9,7 @@
         <li>Asia Warchulska</li>
       </span>
       <span>
-        <b-button variant="primary">
+        <b-button :to='"/verificator/evidence-confirmation#" + evidence._id' variant="primary">
           Szczegóły
         </b-button>
       </span>
