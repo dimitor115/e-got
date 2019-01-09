@@ -4,7 +4,7 @@
             :key="index"
             :title="track.startPoint + '-' +track.endPoint"
             style="max-width: 30rem;"
-            img-src="https://placekitten.com/1000/300"
+            :img-src="track.photo"
             img-alt="Card image"
             img-top>
       <div>
@@ -40,40 +40,35 @@
 </template>
 
 <script>
+  import {fetchData, apiUrl} from "../../assets/utils";
+  import axios from "axios"
 
   export default {
     name: "route-evidence",
     data: () => ({
       trackToRemove: null,
-      fetchedTracks: [
-        {
-          photo: null,
-          startPoint: "Kamieńczyk",
-          endPoint: "Karpacz",
-          points: 34
-        },
-        {
-          photo: null,
-          startPoint: "Kamieńczyk",
-          endPoint: "Karpacz",
-          points: 34
-        },
-        {
-          photo: null,
-          startPoint: "Kamieńczyk",
-          endPoint: "Karpacz",
-          points: 34
-        }
-      ]
+      fetchedTracks: []
     }),
     methods: {
       removeTrack() {
-        console.log('remove secion')
+        try {
+          const id = this.trackToRemove._id
+          axios.delete(`${apiUrl()}/evidences/${id}`)
+          this.fetchTracks()
+        } catch (e) {
+          alert(e)
+        }
       },
       showRemoveConfirmation(track) {
         this.trackToRemove = track
         this.$refs.removeModal.show()
+      },
+      async fetchTracks() {
+        this.fetchedTracks = await fetchData('/evidences/tourist')
       }
+    },
+    async mounted() {
+      this.fetchTracks()
     }
   }
 </script>

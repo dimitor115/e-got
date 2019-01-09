@@ -64,13 +64,12 @@
     }),
     methods: {
       postTrackEvidence() {
-        axios.post(`${apiUrl()}/evidence`, this.evidence)
-          .then(test => {
-            console.log(test)
-          })
-          .catch(err => {
-            console.log("err",err)
-          })
+        try {
+          axios.post(`${apiUrl()}/evidences`, this.evidence)
+          this.$router.push('/turist/route-evidence')
+        } catch (error) {
+          console.log(error) //TODO: make some alert
+        }
       },
       readAndRenderPhoto(event) {
         const file = event.srcElement.files[0]
