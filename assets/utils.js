@@ -1,7 +1,10 @@
 import axios from 'axios'
 
-export async function fetchData(endpoint) {
+export function apiUrl() {
   const serverUrl = document.URL.slice(0, document.URL.indexOf('/', 8))
-  const apiUrl = serverUrl + '/api'
-  return (await axios.get(apiUrl + endpoint)).data
+  return serverUrl + '/api'
+}
+
+export async function fetchData(endpoint) {
+  return (await axios.get(apiUrl() + endpoint)).data
 }

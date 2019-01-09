@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router();
 const routesService = require('./services/routesService.js')
-router.get('/', (req, res)=> {
-  res.send("Chuje muje dzikie wensze")
-})
+const documentationService = require('./services/documentationService')
 
 router.get('/routes', routesService.getSuggestedRoutes)
+
+router.post('/documentation', documentationService.addNewDocumentation)
 
 module.exports = router;

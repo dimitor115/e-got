@@ -42,6 +42,9 @@
 </template>
 
 <script>
+  import axios from 'axios'
+  import {apiUrl} from "../../assets/utils";
+
   export default {
     name: "DocumentNewSectionModal",
     data: () => ({
@@ -61,7 +64,13 @@
     }),
     methods: {
       addNewSectionDocumentation() {
-
+        axios.post(`${apiUrl()}/documentation`, this.documentation)
+          .then(test => {
+            console.log(test)
+          })
+          .catch(err => {
+            console.log(err)
+          })
       },
       readAndRenderPhoto(event) {
         const file = event.srcElement.files[0]

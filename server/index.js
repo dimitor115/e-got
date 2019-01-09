@@ -1,7 +1,8 @@
-
 const express = require('express')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
+const bodyParser = require('body-parser')
+
 const api = require('./api')
 const mongo = require('../assets/mongoDB')
 
@@ -27,6 +28,7 @@ async function start() {
 
   mongo.connect()
 
+  app.use(bodyParser.json())
   app.use('/api', api)
   // Give nuxt middleware to express
   app.use(nuxt.render)
