@@ -2,22 +2,24 @@
   <div class="container">
     <b-card v-for="(section, index) in fetchSections"
             :key="index"
+            :title="section.startPoint + '-' +section.endPoint"
+            style="max-width: 30rem;"
             img-src="https://placekitten.com/1000/300"
             img-alt="Card image"
             img-top>
-      <!--TODO:pull right the remove button-->
       <div>
-         <span class="card-text" style="float: left">
-        {{section.startPoint}} - {{section.endPoint}}
+        <span style="float:left">
+          ptk: <b-badge> {{section.points }}</b-badge>
         </span>
         <span>
-          ptk: <b-badge> {{section.points }}</b-badge> status:   <b-badge variant="warning">Niezatwierdzony</b-badge>
+          status:   <b-badge variant="warning">Niezatwierdzony</b-badge>
         </span>
         <span style="float: right">
-        <b-button size="sm" variant="danger" @click="showRemoveConfirmation(section)">Usuń</b-button>
-      </span>
+          <b-button size="sm" variant="danger" @click="showRemoveConfirmation(section)">Usuń</b-button>
+        </span>
       </div>
     </b-card>
+
     <b-button size="lg" variant="outline-primary"> Dodaj odcinek do zatwierdzenia</b-button>
 
     <b-modal
@@ -76,7 +78,7 @@
     flex-direction: column;
   }
 
-  .container > div {
+  .container > * {
     margin-bottom: 20px;
   }
 </style>

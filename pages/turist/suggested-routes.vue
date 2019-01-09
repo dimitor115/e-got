@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    
+
     <div v-for="(route, idx) in suggestedRoutes">
       <b-card :title="route.title"
               :img-src="'https://picsum.photos/600/300/?image='+idx + 10"
@@ -12,7 +12,9 @@
         <span class="card-text">
           {{route.startPoint}} - {{route.endPoint}}
         </span>
-        <b-button @click="showDescription(route.description)" variant="primary">Go somewhere</b-button>
+        <span style="float: right">
+          <b-button @click="showDescription(route)" variant="outline-primary">Więcej</b-button>
+        </span>
       </b-card>
     </div>
 
@@ -20,9 +22,9 @@
       ref="descriptionModal"
       hide-footer
       centered
-      title="Bootstrap-Vue">
+      :title="selectedRouteTitle">
       <div class="route-description">
-        {{routeDescription}}
+        {{selectedRouteDescription}}
       </div>
     </b-modal>
   </section>
@@ -36,15 +38,17 @@
   export default {
     name: "suggestedRoutesPage",
     data: () => ({
-      routeDescription: null,
+      selectedRouteDescription: null,
+      selectedRouteTitle: null,
       suggestedRoutes: []
     }),
     async mounted() {
       this.suggestedRoutes = await fetchData('/routes')
     },
     methods: {
-      showDescription(description) {
-        this.routeDescription = description
+      showDescription(route) {
+        this.selectedRouteTitle = route.title
+        this.selectedRouteDescription = route.description
         this.$refs.descriptionModal.show()
       }
     }
