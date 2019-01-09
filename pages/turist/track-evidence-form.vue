@@ -44,7 +44,7 @@
 <script>
   import axios from 'axios'
   import {apiUrl} from "../../assets/utils";
-
+  //TODO: dodać wybieranie daty przejścia trasy
   export default {
     name: "DocumentNewSectionModal",
     data: () => ({

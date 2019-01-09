@@ -3,7 +3,7 @@
     <div class="start-page">
       <img class="logo" src="/logo.png"/>
       <b-button to="/turist" variant="outline-success" size="lg">Turysta</b-button>
-      <b-button to="confirm-section" variant="outline-success" size="lg">Przodownik</b-button>
+      <b-button to="/verificator/evidences-list" variant="outline-success" size="lg">Przodownik</b-button>
     </div>
   </section>
 </template>

@@ -20,15 +20,27 @@ class EvidenceService {
     }
   }
 
-  async remove(req, res) {
+  async changeStatus(req) {
     const _id = ObjectId(req.params.id)
-    mongo.evidences.findOneAndDelete({_id})
-      .then(() => res.status(200).send())
-      .catch(err => res.status(500).send(err))
+    const approved = req.body.approved
+    return mongo.evidences.findOneAndUpdate({_id}, {$set: {approved}})
   }
 
-  async getTuristEvidences(req, res) {
-    res.send( await mongo.evidences.find({}).toArray())
+  remove(req) {
+    const _id = ObjectId(req.params.id)
+    return mongo.evidences.findOneAndDelete({_id})
+  }
+
+  async verificatorEvidences() {
+    console.log("-> verificator evidences")
+    return (await mongo.evidences
+      .find({}).toArray())
+      .map(y => {y.photo = null; return y}) //TODO: fix projection
+
+  }
+
+  turistEvidences() {
+    // return mongo.evidences.find({}).toArray() //TODO: dodać punkty dla odcinka
   }
 }
 
