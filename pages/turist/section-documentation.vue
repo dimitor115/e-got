@@ -20,11 +20,16 @@
       </div>
     </b-card>
 
-    <b-button size="lg" variant="outline-primary"> Dodaj odcinek do zatwierdzenia</b-button>
+    <b-button size="lg"
+              variant="outline-primary"
+              to="/turist/document-new-section">
+      Dodaj odcinek do zatwierdzenia
+    </b-button>
 
     <b-modal
       ref="removeModal"
       centered
+      @ok="removeSection"
       title="Potwierdź usunięcie">
       <p v-if="sectionToRemove">
         Jesteś pewnien, że chcesz usunąć trasę {{sectionToRemove.startPoint}} - {{sectionToRemove.endPoint}}
@@ -35,8 +40,11 @@
 </template>
 
 <script>
+  import DocumentNewSectionModal from "./document-new-section";
+
   export default {
     name: "section-documentation",
+    components: {DocumentNewSectionModal},
     data: () => ({
       sectionToRemove: null,
       fetchSections: [
@@ -61,6 +69,12 @@
       ]
     }),
     methods: {
+      showAddSectionModal() {
+        this.$refs.newSectionModal.show()
+      },
+      removeSection() {
+        console.log('remove secion')
+      },
       showRemoveConfirmation(section) {
         this.sectionToRemove = section
         this.$refs.removeModal.show()
