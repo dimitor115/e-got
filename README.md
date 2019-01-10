@@ -26,3 +26,4 @@ For detailed explanation on how things work, checkout [Nuxt.js docs](https://nux
 - `vue-bootstrap`
 - `img-vuer` https://github.com/ssshooter/img-vuer
 - `v-blur` https://github.com/ndelvalle/v-blur
+- `client-compress` https://github.com/davejm/client-compress
