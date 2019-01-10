@@ -33,7 +33,7 @@
     </div>
 
     <button-loader size="lg"
-                   class="add-button"
+                   class="responsive-button button-margin"
                    variant="outline-primary"
                    :is-processing="isRequestProcessing"
                    @click="postTrackEvidence">
@@ -103,8 +103,7 @@
     max-height: 200px;
   }
 
-  .add-button {
-    width: 20em;
+  .button-margin {
     margin-top: 40px;
   }
 

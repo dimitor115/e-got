@@ -1,20 +1,27 @@
 <template>
   <div class="container">
     <loader v-blur="isUpdateRequestProcessing" :is-processing="!isEvidenceDownloaded">
-      <img v-if="evidence"
-           style="max-width: 20em"
-           v-gallery
-           :src="evidence.photo">
-      <b-table stacked :fields="displayFields" :items="evidenceDisplay"></b-table>
+      <b-jumbotron v-if="evidence">
+        <img style="max-width: 20em"
+             v-gallery
+             :src="evidence.photo">
+      </b-jumbotron>
 
-      <div>
+      <b-table stacked
+               :fields="displayFields"
+               :items="evidenceDisplay">
+      </b-table>
+
+      <div class="responsive-button">
         <b-button variant="outline-danger"
                   size="lg"
+                  style="width: 47%"
                   @click="updateEvidenceStatus(false)">
           Odrzuć
         </b-button>
         <b-button variant="success"
                   size="lg"
+                  style="width: 47%"
                   @click="updateEvidenceStatus(true)">
           Zatwierdź
         </b-button>
@@ -67,7 +74,7 @@
         const id = this.evidence._id
         this.isUpdateRequestProcessing = true
         axios.put(`${apiUrl()}/evidences/${id}`, {approved: status})
-          .then(()=>{
+          .then(() => {
             this.isUpdateRequestProcessing = false
             this.$router.push('/verificator/evidences-list')
           })
@@ -82,5 +89,5 @@
 </script>
 
 <style scoped lang="scss">
-@import "../../assets/common-styles";
+  @import "../../assets/common-styles";
 </style>

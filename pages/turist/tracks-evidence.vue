@@ -27,6 +27,8 @@
 
     <b-button size="lg"
               variant="outline-primary"
+              class="responsive-button"
+              style="margin: 20px 0 20px 0"
               to="/turist/track-evidence-form">
       Dodaj odcinek do zatwierdzenia
     </b-button>
