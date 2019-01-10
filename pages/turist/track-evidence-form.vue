@@ -24,10 +24,10 @@
         <b-form-file @change="readAndRenderPhoto" placeholder="Choose a file..."></b-form-file>
       </b-form-group>
 
-      <b-jumbotron v-if="evidence.sectionPhoto">
+      <b-jumbotron v-if="evidence.photo">
         <b-img
           class="photo-preview"
-          :src="evidence.sectionPhoto">
+          :src="evidence.photo">
         </b-img>
       </b-jumbotron>
     </div>
@@ -45,16 +45,18 @@
 
 <script>
   import axios from 'axios'
-  import {apiUrl} from "../../assets/utils";
+  import {apiUrl, toBase64, compressPhoto} from "../../assets/utils";
   import ButtonLoader from "../../components/button-loader";
+
   //TODO: dodać wybieranie daty przejścia trasy
   export default {
     name: "DocumentNewSectionModal",
     components: {ButtonLoader},
     data: () => ({
       isRequestProcessing: false,
+      previewPhoto: null,
       evidence: {
-        sectionPhoto: null,
+        photo: null,
         startPoint: null,
         endPoint: null
       },
@@ -77,15 +79,9 @@
           })
           .catch(err => alert(err))
       },
-      readAndRenderPhoto(event) {
+      async readAndRenderPhoto(event) {
         const file = event.srcElement.files[0]
-        const reader = new FileReader()
-        reader.onload = () => {
-          this.evidence.sectionPhoto = reader.result
-        }
-        if (file) {
-          reader.readAsDataURL(file)
-        }
+        this.evidence.photo = await toBase64(await compressPhoto(file))
       }
     }
   }
@@ -104,7 +100,7 @@
   }
 
   .button-margin {
-    margin-top: 40px;
+    margin: 40px 0 20px 0;
   }
 
 </style>

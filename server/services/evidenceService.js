@@ -9,7 +9,7 @@ class EvidenceService {
     const evidence = {
       track: trackId,
       author: "build_in_turist",
-      photo: payload.sectionPhoto,
+      photo: payload.photo,
       approved: null,
       additionDate: Date()
     }
