@@ -1,17 +1,23 @@
 <template>
   <section class="container">
-    <div class="start-page">
-      <img class="logo" src="/logo.png"/>
-      <b-button to="/turist" variant="outline-success" size="lg">Turysta</b-button>
-      <b-button to="/verificator/evidences-list" variant="outline-success" size="lg">Przodownik</b-button>
-    </div>
+      <img class="logo" src="/logo.gif"/>
+      <b-button to="/turist"
+                variant="outline-success"
+                class="menu-button"
+                size="lg">
+        Turysta
+      </b-button>
+      <b-button to="/verificator/evidences-list"
+                variant="outline-success"
+                class="menu-button"
+                size="lg">
+        Przodownik
+      </b-button>
   </section>
 </template>
 
 <script>
-  export default {
-
-  }
+  export default {}
 </script>
 
 <style>
@@ -22,19 +28,19 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-  }
-
-  .logo {
-    height: 350px;
-    width: 350px;
-  }
-
-  .start-page{
-    display: flex;
     flex-direction: column;
   }
 
-  .start-page > * {
+  .logo {
+    height: 13em;
+    width: 13em;
+  }
+
+  .container > * {
     margin-bottom: 20px;
+  }
+
+  .menu-button {
+    min-width: 16em;
   }
 </style>

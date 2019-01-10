@@ -1,17 +1,25 @@
 <template>
   <section class="container">
-    <div class="start-page">
-      <img class="logo" src="/turist.png"/>
-      <b-button to="/turist/suggested-routes" variant="outline-success" size="lg">Zobacz proponowane trasy</b-button>
-      <b-button to="/turist/tracks-evidence" variant="outline-success" size="lg">Dodaj przebytą trasę</b-button>
-    </div>
+
+    <img class="logo" src="/turist.gif"/>
+    <b-button to="/turist/suggested-routes"
+              class="menu-button"
+              variant="outline-success"
+              size="lg">Zobacz proponowane trasy
+    </b-button>
+
+    <b-button to="/turist/tracks-evidence"
+              class="menu-button"
+              variant="outline-success"
+              size="lg">
+      Dodaj przebytą trasę
+    </b-button>
+
   </section>
 </template>
 
 <script>
-  export default {
-
-  }
+  export default {}
 </script>
 
 <style>
@@ -22,19 +30,18 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-  }
-
-  .logo {
-    height: 350px;
-    width: 350px;
-  }
-
-  .start-page{
-    display: flex;
     flex-direction: column;
   }
 
-  .start-page > * {
+  .logo {
+    height: 13em;
+  }
+
+  .container > * {
     margin-bottom: 20px;
+  }
+
+  .menu-button {
+    min-width: 16em;
   }
 </style>

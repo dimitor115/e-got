@@ -15,6 +15,9 @@
         </b-button>
       </span>
       </b-card>
+      <div v-if="evidences.length === 0">
+        Nie ma więcej oczekujących odcinków do zatwierdzenia !
+      </div>
     </loader>
   </div>
 </template>

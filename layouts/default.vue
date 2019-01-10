@@ -1,19 +1,18 @@
 <template>
   <div>
-    <b-navbar toggleable type="light" variant="light">
-      <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
-      <b-navbar-brand>e-GOT</b-navbar-brand>
-      <b-collapse is-nav id="nav_text_collapse">
-        <b-navbar-nav>
-          <b-nav-text>The best mountain app</b-nav-text>
-        </b-navbar-nav>
-      </b-collapse>
+    <b-navbar sticky="true" fixed="top" toggleable type="light" variant="primary" class="app-nav">
+      <nuxt-link to="/" style="color: white"><h5>e-GOT</h5></nuxt-link>
     </b-navbar>
     <nuxt/>
   </div>
 </template>
 
 <style>
+  .app-nav {
+    display: flex;
+    justify-content: center;
+    color: white;
+  }
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;

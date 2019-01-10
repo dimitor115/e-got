@@ -22,6 +22,7 @@ $ npm run generate
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
 
 ## Credits:
-- vue-bootstrap
-- https://github.com/ssshooter/img-vuer
-- 
+- `nuxt.js`
+- `vue-bootstrap`
+- `img-vuer` https://github.com/ssshooter/img-vuer
+- `v-blur` https://github.com/ndelvalle/v-blur
