@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <loader :is-processing="!isEvidenceDownloaded">
+    <loader v-blur="isUpdateRequestProcessing" :is-processing="!isEvidenceDownloaded">
       <img v-if="evidence"
            style="max-width: 20em"
            v-gallery
@@ -33,6 +33,7 @@
     components: {Loader},
     data: () => ({
       isEvidenceDownloaded: false,
+      isUpdateRequestProcessing: false,
       evidence: null,
       test: [{aaa: "sadsad", maciek: "asdasd"}],
       displayFields: [
@@ -64,8 +65,12 @@
     methods: {
       updateEvidenceStatus(status) {
         const id = this.evidence._id
+        this.isUpdateRequestProcessing = true
         axios.put(`${apiUrl()}/evidences/${id}`, {approved: status})
-          .then(()=>this.$router.push('/verificator/evidences-list'))
+          .then(()=>{
+            this.isUpdateRequestProcessing = false
+            this.$router.push('/verificator/evidences-list')
+          })
           .catch(err => alert(err))
       }
     },

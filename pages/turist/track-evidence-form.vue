@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="evidence-form">
+    <div v-blur="isRequestProcessing" class="evidence-form">
       <b-form-group label="Grupa górska:"
                     description="Wybierz obszar po którym podróżowałeś">
         <b-form-select :options="mountainGroups">
@@ -31,12 +31,14 @@
         </b-img>
       </b-jumbotron>
     </div>
-    <b-button size="lg"
-              style="margin-top: 40px"
-              variant="outline-primary"
-              @click="postTrackEvidence">
+
+    <button-loader size="lg"
+                   class="add-button"
+                   variant="outline-primary"
+                   :is-processing="isRequestProcessing"
+                   @click="postTrackEvidence">
       Dodaj odcinek do zatwierdzenia
-    </b-button>
+    </button-loader>
 
   </div>
 </template>
@@ -44,10 +46,13 @@
 <script>
   import axios from 'axios'
   import {apiUrl} from "../../assets/utils";
+  import ButtonLoader from "../../components/button-loader";
   //TODO: dodać wybieranie daty przejścia trasy
   export default {
     name: "DocumentNewSectionModal",
+    components: {ButtonLoader},
     data: () => ({
+      isRequestProcessing: false,
       evidence: {
         sectionPhoto: null,
         startPoint: null,
@@ -64,8 +69,12 @@
     }),
     methods: {
       postTrackEvidence() {
+        this.isRequestProcessing = true
         axios.post(`${apiUrl()}/evidences`, this.evidence)
-          .then(() => this.$router.push('/turist/tracks-evidence'))
+          .then(() => {
+            this.isRequestProcessing = false
+            this.$router.push('/turist/tracks-evidence')
+          })
           .catch(err => alert(err))
       },
       readAndRenderPhoto(event) {
@@ -99,5 +108,10 @@
 
   .photo-preview {
     max-height: 200px;
+  }
+
+  .add-button {
+    width: 20em;
+    margin-top: 40px;
   }
 </style>

@@ -66,7 +66,7 @@
     width: 5em;
     height: 0.3em;
     border-radius: 60%;
-    background: radial-gradient(rgba(#ffaa56, 1) 40%, transparent 70%);
+    background: radial-gradient(rgba(0, 123, 255, 1) 40%, transparent 70%);
     position: absolute;
     left: 50%;
     bottom: 0;
