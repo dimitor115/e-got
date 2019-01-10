@@ -103,15 +103,8 @@
   }
 </script>
 
-<style scoped>
-  .container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    margin-top: 20px
-  }
+<style scoped lang="scss">
+  @import "../../assets/common-styles";
 
   .tracks-list {
     display: flex;
@@ -120,6 +113,6 @@
   }
 
   .tracks-list > * {
-    margin-bottom: 20px;
+    margin-top: 20px;
   }
 </style>

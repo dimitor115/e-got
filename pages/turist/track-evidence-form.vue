@@ -92,14 +92,7 @@
 </script>
 
 <style scoped>
-  .container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-  }
+  @import "../../assets/common-styles.scss";
 
   .evidence-form > * {
     max-width: 30em;
@@ -114,4 +107,5 @@
     width: 20em;
     margin-top: 40px;
   }
+
 </style>

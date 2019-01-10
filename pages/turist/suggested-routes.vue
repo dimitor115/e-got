@@ -55,18 +55,11 @@
   }
 </script>
 
-<style scoped>
-  .container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-  }
+<style scoped lang="scss">
+  @import "../../assets/common-styles";
 
   .container > div {
-    margin-bottom: 20px;
+    margin-top: 20px;
   }
 
   .route-description {

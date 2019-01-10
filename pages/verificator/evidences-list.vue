@@ -41,15 +41,8 @@
   }
 </script>
 
-<style scoped>
-  .container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-  }
+<style scoped lang="scss">
+  @import "../../assets/common-styles";
 
   .evidences-list {
     display: flex;
