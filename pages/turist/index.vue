@@ -3,13 +3,13 @@
 
     <img class="logo" src="/turist.gif"/>
     <b-button to="/turist/suggested-routes"
-              class="menu-button"
+              class="responsive-button"
               variant="outline-success"
               size="lg">Zobacz proponowane trasy
     </b-button>
 
     <b-button to="/turist/tracks-evidence"
-              class="menu-button"
+              class="responsive-button"
               variant="outline-success"
               size="lg">
       Dodaj przebytą trasę
@@ -19,29 +19,16 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+    name: 'turist-home-page'
+  }
 </script>
 
-<style>
-
-  .container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-  }
-
-  .logo {
-    height: 13em;
-  }
+<style scoped>
+  @import "../../assets/common-styles.scss";
 
   .container > * {
     margin-bottom: 20px;
   }
 
-  .menu-button {
-    min-width: 16em;
-  }
 </style>

@@ -3,13 +3,13 @@
       <img class="logo" src="/logo.gif"/>
       <b-button to="/turist"
                 variant="outline-success"
-                class="menu-button"
+                class="responsive-button"
                 size="lg">
         Turysta
       </b-button>
       <b-button to="/verificator/evidences-list"
                 variant="outline-success"
-                class="menu-button"
+                class="responsive-button"
                 size="lg">
         Przodownik
       </b-button>
@@ -17,30 +17,16 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+    name: 'home-page'
+  }
 </script>
 
-<style>
-
-  .container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-  }
-
-  .logo {
-    height: 13em;
-    width: 13em;
-  }
+<style scoped lang="scss">
+  @import "../assets/common-styles";
 
   .container > * {
     margin-bottom: 20px;
   }
 
-  .menu-button {
-    min-width: 16em;
-  }
 </style>
