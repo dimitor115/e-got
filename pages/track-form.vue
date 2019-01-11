@@ -8,7 +8,7 @@
         @click="addMarker">
         <l-tile-layer :url="url"></l-tile-layer>
         <!--Put on map layer here -->
-        <template v-for="(position, index) in markersPositions">
+        <template v-for="(position, index) in track.geoPoints">
           <l-circle-marker v-if="index === currentMarkerIndex"
                            :lat-lng="position"
                            :radius="6"
@@ -20,7 +20,7 @@
         </template>
 
         <l-polyline
-          :lat-lngs="markersPositions"
+          :lat-lngs="track.geoPoints"
           :fill="false"
           color="red">
         </l-polyline>
@@ -28,7 +28,7 @@
     </no-ssr>
     <section>
       <div class="track-list">
-        <b-card v-for="(position, index) in markersPositions"
+        <b-card v-for="(position, index) in track.geoPoints"
                 :key="index"
                 border-variant="primary"
                 class="route-card"
@@ -54,11 +54,34 @@
         <b-button variant="outline-success"
                   style="margin-left: 0.25em"
                   size="lg"
-                  @click="save">
+                  @click="showDetails">
           Zapisz
         </b-button>
       </div>
     </section>
+    <b-modal
+      ref="detailsModal"
+      centered
+      @ok="saveTrack"
+      title="Szczegóły odcinka">
+      <div>
+        <b-form-group label="Grupa górska:"
+                      description="Podaj grupę górską do której należy dany odcinek">
+          <b-form-input v-model="track.group"
+                        type="text"
+                        placeholder="Podaj grupę górską">
+          </b-form-input>
+        </b-form-group>
+
+        <b-form-group label="Punkty:"
+                      description="Podaj ile punktów wart jest ten odcinek">
+          <b-form-input v-model="track.points"
+                        type="number"
+                        placeholder="0">
+          </b-form-input>
+        </b-form-group>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -66,6 +89,8 @@
 <script>
   import {LTileLayer, LMap, LMarker, LPolyline, LControl, LCircleMarker} from 'vue2-leaflet'
   import 'leaflet/dist/leaflet.css'
+  import axios from 'axios'
+  import {apiUrl} from "../assets/utils";
 
   export default {
     name: 'track-form',
@@ -76,21 +101,32 @@
       center: [50.81341933276091, 15.51973342895508],
       currentMarkerIndex: null,
       markersPositions: [],
+      track: {
+        geoPoints: [],
+        points: 0,
+        group: null
+      },
       bounds: null
     }),
     methods: {
       markTheCurrentMarker(index) {
-        console.log(index)
         this.currentMarkerIndex = index
       },
       reset() {
-        this.markersPositions = []
+        this.track.geoPoints = []
       },
-      save() {
-        console.log({...this.markersPositions[0]})
+      saveTrack() {
+        axios.post(`${apiUrl()}/tracks`, this.track)
+          .then(() => {
+            alert('Dodano!')
+          })
+          .catch(err => alert(err))
+      },
+      showDetails() {
+        this.$refs.detailsModal.show()
       },
       addMarker(event) {
-        this.markersPositions.push({...event.latlng, name: null, height: 345})
+        this.track.geoPoints.push({...event.latlng, name: null, height: 345})
       }
     }
   }
@@ -100,7 +136,6 @@
     display: flex;
     justify-content: center;
     margin: 2em 0 2em 0;
-    /*flex-direction: column;*/
   }
 
   .map-wrapper {

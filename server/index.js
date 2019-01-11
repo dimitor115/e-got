@@ -4,7 +4,7 @@ const { Nuxt, Builder } = require('nuxt')
 const bodyParser = require('body-parser')
 
 const api = require('./api')
-const mongo = require('../assets/mongoDB')
+const mongo = require('./mongoDB')
 
 const app = express()
 const host = process.env.HOST || 'localhost'

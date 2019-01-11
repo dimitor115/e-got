@@ -1,4 +1,4 @@
-const mongo = require('../../assets/mongoDB.js')
+const mongo = require('../mongoDB.js')
 const ObjectId = require('mongodb').ObjectID
 
 class EvidenceService {

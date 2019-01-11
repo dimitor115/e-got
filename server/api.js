@@ -2,9 +2,11 @@ const express = require('express')
 const router = express.Router();
 const routesService = require('./services/routesService.js')
 const evidenceService = require('./services/evidenceService')
+const tracksService = require('./services/trackService')
 
 router.get('/routes', routesService.getSuggestedRoutes)
 
+router.post('/tracks', catchResult(tracksService.add))
 
 router.post('/evidences', evidenceService.addEvidence)
 router.get('/evidences/tourist', catchResult(evidenceService.turistEvidences))
@@ -23,7 +25,7 @@ function catchResult(resultFunction) {
         .catch(err => {
           console.log(err);
           res.status(500).send(err);
-        });
+        })
     }
   }
 }

@@ -1,8 +1,8 @@
-const mongo = require('../../assets/mongoDB.js')
+const mongo = require('../mongoDB.js')
 
 class RoutesService {
   async getSuggestedRoutes(req, res) {
-    res.send(await mongo.routes.find({}).toArray())
+    return mongo.routes.find({}).toArray()
   }
 }
 

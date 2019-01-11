@@ -7,6 +7,8 @@ class MongoService {
 
     this.routes = client.collection('routes')
     this.evidences = client.collection('evidences')
+    this.geoPoints = client.collection('points')
+    this.tracks = client.collection('tracks')
     console.log('Collection imported')
   }
 }
