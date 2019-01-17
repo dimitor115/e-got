@@ -12,6 +12,7 @@
     display: flex;
     justify-content: center;
     color: white;
+    min-height: 3.5em;
   }
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',

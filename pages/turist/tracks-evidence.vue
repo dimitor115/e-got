@@ -9,15 +9,14 @@
               img-alt="Card image"
               img-top>
         <div>
-        <span style="float:left">
-          ptk: <b-badge> {{track.points }}</b-badge>
-        </span>
-          <span>
-          status:
+          <span style="float:left; font-size: 20px;">
+            <b-badge> 34p </b-badge>
+          </span>
+          <span style="font-size: 20px;">
             <b-badge :variant="mapEvidenceStatusVariant(track)">
               {{mapEvidenceStatusText(track)}}
             </b-badge>
-        </span>
+          </span>
           <span style="float: right">
           <b-button size="sm" variant="danger" @click="showRemoveConfirmation(track)">Usuń</b-button>
         </span>
