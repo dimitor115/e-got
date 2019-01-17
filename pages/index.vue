@@ -1,18 +1,25 @@
 <template>
   <section class="container">
-      <img class="logo" src="/logo.gif"/>
-      <b-button to="/turist"
-                variant="outline-success"
-                class="responsive-button"
-                size="lg">
-        Turysta
-      </b-button>
-      <b-button to="/verificator/evidences-list"
-                variant="outline-success"
-                class="responsive-button"
-                size="lg">
-        Przodownik
-      </b-button>
+    <img class="logo" src="/logo.gif"/>
+    <b-button to="/turist"
+              variant="outline-success"
+              class="responsive-button"
+              size="lg">
+      Turysta
+    </b-button>
+    <b-button to="/verificator/evidences-list"
+              variant="outline-success"
+              class="responsive-button"
+              size="lg">
+      Przodownik
+    </b-button>
+
+    <b-button to="/track-form"
+              class="responsive-button"
+              variant="outline-primary"
+              size="lg">
+      Komisja PTTK
+    </b-button>
   </section>
 </template>
 

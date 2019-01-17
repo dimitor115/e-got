@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <template v-if="viewPortWidth > 1900">
     <no-ssr>
       <l-map
         class="map-wrapper"
@@ -7,7 +8,6 @@
         :center="center"
         @click="addMarker">
         <l-tile-layer :url="url"></l-tile-layer>
-        <!--Put on map layer here -->
         <template v-for="(position, index) in track.geoPoints">
           <l-circle-marker v-if="index === currentMarkerIndex"
                            :lat-lng="position"
@@ -82,6 +82,12 @@
         </b-form-group>
       </div>
     </b-modal>
+    </template>
+    <div v-else class="container">
+      <b-card border-variant="danger">
+        <p>Ten widok jest dostępny tylko na desktopowej wersji</p>
+      </b-card>
+    </div>
   </div>
 </template>
 
@@ -123,15 +129,30 @@
           .catch(err => alert(err))
       },
       showDetails() {
-        this.$refs.detailsModal.show()
+        if(this.areTrackNamesValid()) {
+          this.$refs.detailsModal.show()
+        } else {
+          alert('Punkt początkowy i końcowy muszą mieć nazwę !')
+        }
       },
       addMarker(event) {
         this.track.geoPoints.push({...event.latlng, name: null, height: 345})
+      },
+      areTrackNamesValid() {
+        const geoPoints = this.track.geoPoints
+        return geoPoints[0].name && geoPoints[geoPoints.length -1].name
+      }
+    },
+    computed: {
+      viewPortWidth() {
+        return Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
       }
     }
   }
 </script>
 <style scoped lang="scss">
+  @import "../assets/common-styles";
+
   .content {
     display: flex;
     justify-content: center;
