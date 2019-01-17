@@ -32,8 +32,13 @@
 <style scoped lang="scss">
   @import "../assets/common-styles";
 
-  .container > * {
-    margin-bottom: 20px;
-  }
+  .container {
+    > * {
+      margin-bottom: 20px;
+    }
 
+    > img {
+      margin-bottom: 5em;
+    }
+  }
 </style>

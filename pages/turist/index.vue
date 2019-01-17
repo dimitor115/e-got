@@ -24,11 +24,19 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   @import "../../assets/common-styles.scss";
 
-  .container > * {
-    margin-bottom: 20px;
+  .container {
+
+    > * {
+      margin-bottom: 20px;
+    }
+
+    > img {
+      margin-bottom: 5em;
+    }
+
   }
 
 </style>

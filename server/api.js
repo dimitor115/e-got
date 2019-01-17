@@ -4,7 +4,7 @@ const routesService = require('./services/routesService.js')
 const evidenceService = require('./services/evidenceService')
 const tracksService = require('./services/trackService')
 
-router.get('/routes', routesService.getSuggestedRoutes)
+router.get('/routes', catchResult(routesService.getSuggestedRoutes))
 
 router.post('/tracks', catchResult(tracksService.add))
 

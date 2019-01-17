@@ -48,7 +48,6 @@
   import {apiUrl, toBase64, compressPhoto} from "../../assets/utils";
   import ButtonLoader from "../../components/button-loader";
 
-  //TODO: dodać wybieranie daty przejścia trasy
   export default {
     name: "DocumentNewSectionModal",
     components: {ButtonLoader},

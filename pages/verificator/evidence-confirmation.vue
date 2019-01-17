@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <loader v-blur="isUpdateRequestProcessing" :is-processing="!isEvidenceDownloaded">
-      <b-jumbotron v-if="evidence">
+      <b-jumbotron  v-if="evidence" style="margin-top:20px;">
         <img style="max-width: 20em"
              v-gallery
              :src="evidence.photo">

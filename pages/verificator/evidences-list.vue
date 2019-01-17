@@ -3,14 +3,20 @@
     <loader class="evidences-list" :is-processing="!areEvidencesFetched">
       <b-card v-for="(evidence, index) in evidences"
               :key="index"
-              style="background-color: #f7f8fb"
+              border-variant="primary"
               class="text-center">
-      <span class="card-info">
-        <li>Kamieńczyk - Zakpane</li>
-        <li>{{evidence.author}}</li>
-      </span>
+      <div class="card-info">
+        <li>
+        <b-badge variant="light">Kamieńczyk - Zakpane</b-badge>
+        </li>
+        <li>
+        <b-badge variant="light">{{evidence.author}}</b-badge>
+        </li>
+      </div>
         <span>
-        <b-button :to='"/verificator/evidence-confirmation#" + evidence._id' variant="primary">
+        <b-button :to='"/verificator/evidence-confirmation#" + evidence._id'
+                  class="details-button"
+                  variant="outline-success">
           Szczegóły
         </b-button>
       </span>
@@ -54,11 +60,19 @@
     margin-bottom: 20px;
   }
 
+  .details-button {
+    min-width: 16em;
+    margin-top: 10px;
+  }
+
   .card-info {
     text-align: left;
     float: left;
-    max-width: 30em;
-    min-width: 20em;
+    min-width: 16em;
     list-style-type: none;
+
+    li {
+      font-size: 23px;
+    }
   }
 </style>
