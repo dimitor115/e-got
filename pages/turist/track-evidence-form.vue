@@ -48,6 +48,8 @@
   import {apiUrl, toBase64, compressPhoto} from "../../assets/utils";
   import ButtonLoader from "../../components/button-loader";
 
+  // TODO: zadanie dla ciebie. Trzeba wystawić endpoint w pliku api.js który zwróci punkt startowy i końcowy wszystkich odcinków punktowanych
+  // w pierwszym selekcie trza pokazać wszystkie możliwe punkty startowe, a w drugim tylko te punkty koncowe dla których wybrany wyżej punk jest początkowym
   export default {
     name: "DocumentNewSectionModal",
     components: {ButtonLoader},
