@@ -10,6 +10,8 @@ class EvidenceService {
       track: trackId,
       author: "build_in_turist",
       photo: payload.photo,
+      startPoint: payload.startPoint,
+      endPoint: payload.endPoint,
       approved: null,
       additionDate: Date()
     }

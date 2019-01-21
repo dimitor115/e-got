@@ -9,13 +9,13 @@
 
       <b-form-group label="Punkt początkowy:"
                     description="Wybierz punkt początkowy jednego z punktownych odcinków, dodanych przez komisję">
-        <b-form-select :options="startPoints">
+        <b-form-select v-model="evidence.startPoint" :options="startPoints">
         </b-form-select>
       </b-form-group>
 
       <b-form-group label="Punkt końcowy:"
                     description="Wybierz punkt jeden z punktów końcowych, dostępnych dla punktowanych odcinków ">
-        <b-form-select :options="startPoints">
+        <b-form-select v-model="evidence.endPoint" :options="endPoints">
         </b-form-select>
       </b-form-group>
 
@@ -61,13 +61,14 @@
         startPoint: null,
         endPoint: null
       },
-      mountainGroups: ['Tatry', 'Karpaty', 'Bieszczady'],
-      startPoints: [
-        {text: "Zakopane"},
-        {text: "Hala Gąsiennicowa"},
-        {text: "Kacprowy wierch - schronisko"},
-        {text: "Hala Miziowa"},
-        {text: "Korbielów"},
+      mountainGroups:['Tatry i Podtatrze polskie', 'Beskidy Zachodnie', 'Beskidy Wschodnie', 'Sudety'],
+      geoPoints: [
+        {startPoint: 'Dolina Chochołowska', endPoints: ['Siwa Polana']},
+        {startPoint: 'Siwa Polana', endPoints: ['Dolina Chochołowska', 'Polana Huciska']},
+        {startPoint: 'Polana Huciska', endPoints: ['Siwa Polana', 'Dolina Dudowa']},
+        {startPoint: 'Dolina Dudowa', endPoints: ['Polana Huciska']},
+        {startPoint: 'Starorobocińska Dolina', endPoints: ['Dolina Dudowa', 'Polana Trzydniówka', 'Polana Iwanówka']},
+        {startPoint: 'Polana Iwanówka', endPoints: ['Starorobocińska Dolina', 'Iwaniecka Przełęcz', 'Schronisko PTTK na Hali Ornak']}
       ]
     }),
     methods: {
@@ -83,6 +84,16 @@
       async readAndRenderPhoto(event) {
         const file = event.srcElement.files[0]
         this.evidence.photo = await toBase64(await compressPhoto(file))
+      }
+    },
+    computed: {
+      startPoints() {
+        return this.geoPoints.map(x => x.startPoint)
+      },
+      endPoints() {
+        return this.evidence.startPoint
+        ? this.geoPoints.find(x => x.startPoint === this.evidence.startPoint).endPoints
+        : []
       }
     }
   }

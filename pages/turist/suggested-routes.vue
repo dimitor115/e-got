@@ -1,33 +1,42 @@
 <template>
   <section class="container">
-    <loader class="tracks-list" :is-processing="isRequestProcessing">
-      <div v-for="(route, idx) in suggestedRoutes">
-        <b-card :title="route.title"
-                :img-src="route.photo"
-                img-alt="Image"
-                img-top
-                tag="article"
-                style="max-width: 30rem;"
-                class="mb-2">
+
+    <b-select v-if="!selectedMountainGroup" style="max-width: 30em;" v-model="selectedMountainGroup"
+              :options="['Tatry i Podtatrze polskie', 'Beskidy Zachodnie', 'Beskidy Wschodnie', 'Sudety']"></b-select>
+
+    <template v-else>
+      <loader v-if="selectedMountainGroup==='Tatry i Podtatrze polskie'" class="tracks-list" :is-processing="isRequestProcessing">
+        <div v-for="(route, idx) in suggestedRoutes">
+          <b-card :title="route.title"
+                  :img-src="route.photo"
+                  img-alt="Image"
+                  img-top
+                  tag="article"
+                  style="max-width: 30rem;"
+                  class="mb-2">
         <span class="card-text">
           {{route.startPoint}} - {{route.endPoint}}
         </span>
-          <span style="float: right">
+            <span style="float: right">
           <b-button @click="showDescription(route)" variant="outline-primary">Więcej</b-button>
         </span>
-        </b-card>
-      </div>
-
-      <b-modal
-        ref="descriptionModal"
-        hide-footer
-        centered
-        :title="selectedRouteTitle">
-        <div class="route-description">
-          {{selectedRouteDescription}}
+          </b-card>
         </div>
-      </b-modal>
-    </loader>
+
+        <b-modal
+          ref="descriptionModal"
+          hide-footer
+          centered
+          :title="selectedRouteTitle">
+          <div class="route-description">
+            {{selectedRouteDescription}}
+          </div>
+        </b-modal>
+      </loader>
+      <div v-else>
+        Dla tej grupy górskiej nie mamy jeszcze propzycji tras :C
+      </div>
+    </template>
   </section>
 
 
@@ -44,7 +53,8 @@
       selectedRouteDescription: null,
       selectedRouteTitle: null,
       suggestedRoutes: [],
-      isRequestProcessing: true
+      isRequestProcessing: true,
+      selectedMountainGroup: null
     }),
     async mounted() {
       this.suggestedRoutes = await fetchData('/routes')
