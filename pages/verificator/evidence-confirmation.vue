@@ -58,8 +58,8 @@
         if (this.evidence) {
           return [
             {
-              startPoint: "Kamieńczyk",
-              endPoint: "Zakopane",
+              startPoint: this.evidence.startPoint,
+              endPoint:this.evidence.endPoints,
               author: this.evidence.author,
               additionDate: this.evidence.additionDate
             }

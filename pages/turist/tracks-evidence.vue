@@ -10,7 +10,7 @@
               img-top>
         <div>
           <span style="float:left; font-size: 20px;">
-            <b-badge> 34p </b-badge>
+            <!--<b-badge> 34p </b-badge>-->
           </span>
           <span style="font-size: 20px;">
             <b-badge :variant="mapEvidenceStatusVariant(track)">
