@@ -47,6 +47,7 @@
         {key: "startPoint", label: "Punkt początkowy"},
         {key: "endPoint", label: "Punkt końcowy"},
         {key: "author", label: "Turysta"},
+        {key: "trackDate", label: "Data przejścia"},
         {key: "additionDate", label: "Dodane"}
       ]
     }),
@@ -57,12 +58,7 @@
       evidenceDisplay() {
         if (this.evidence) {
           return [
-            {
-              startPoint: this.evidence.startPoint,
-              endPoint:this.evidence.endPoints,
-              author: this.evidence.author,
-              additionDate: this.evidence.additionDate
-            }
+            {...this.evidence}
           ]
         } else {
           return []

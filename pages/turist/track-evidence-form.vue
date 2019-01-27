@@ -19,7 +19,16 @@
         </b-form-select>
       </b-form-group>
 
-      <b-form-group label="Dodów przejścia odcinka"
+      <b-form-group label="Data przejścia odcinka:"
+                    description="Podaj nam dokładną dane kiedy udało Ci się przebyć dany odcinek">
+        <div class="datepicker-wrapper">
+          <datepicker input-class="datepicker-custom"
+                      v-model="evidence.trackDate">
+          </datepicker>
+        </div>
+      </b-form-group>
+
+      <b-form-group label="Dowód przejścia odcinka"
                     description="Dodaj zdjęcie siebie w charakterystycznym miejscu na wybranym odcinku">
         <b-form-file @change="readAndRenderPhoto" placeholder="Choose a file..."></b-form-file>
       </b-form-group>
@@ -45,30 +54,33 @@
 
 <script>
   import axios from 'axios'
+  import Datepicker from 'vuejs-datepicker'
   import {apiUrl, toBase64, compressPhoto} from "../../assets/utils";
   import ButtonLoader from "../../components/button-loader";
 
-  // TODO: zadanie dla ciebie. Trzeba wystawić endpoint w pliku api.js który zwróci punkt startowy i końcowy wszystkich odcinków punktowanych
-  // w pierwszym selekcie trza pokazać wszystkie możliwe punkty startowe, a w drugim tylko te punkty koncowe dla których wybrany wyżej punk jest początkowym
   export default {
     name: "DocumentNewSectionModal",
-    components: {ButtonLoader},
+    components: {ButtonLoader, Datepicker},
     data: () => ({
       isRequestProcessing: false,
       previewPhoto: null,
       evidence: {
         photo: null,
         startPoint: null,
-        endPoint: null
+        endPoint: null,
+        trackDate: null
       },
-      mountainGroups:['Tatry i Podtatrze polskie', 'Beskidy Zachodnie', 'Beskidy Wschodnie', 'Sudety'],
+      mountainGroups: ['Tatry i Podtatrze polskie', 'Beskidy Zachodnie', 'Beskidy Wschodnie', 'Sudety'],
       geoPoints: [
         {startPoint: 'Dolina Chochołowska', endPoints: ['Siwa Polana']},
         {startPoint: 'Siwa Polana', endPoints: ['Dolina Chochołowska', 'Polana Huciska']},
         {startPoint: 'Polana Huciska', endPoints: ['Siwa Polana', 'Dolina Dudowa']},
         {startPoint: 'Dolina Dudowa', endPoints: ['Polana Huciska']},
         {startPoint: 'Starorobocińska Dolina', endPoints: ['Dolina Dudowa', 'Polana Trzydniówka', 'Polana Iwanówka']},
-        {startPoint: 'Polana Iwanówka', endPoints: ['Starorobocińska Dolina', 'Iwaniecka Przełęcz', 'Schronisko PTTK na Hali Ornak']}
+        {
+          startPoint: 'Polana Iwanówka',
+          endPoints: ['Starorobocińska Dolina', 'Iwaniecka Przełęcz', 'Schronisko PTTK na Hali Ornak']
+        }
       ]
     }),
     methods: {
@@ -92,8 +104,8 @@
       },
       endPoints() {
         return this.evidence.startPoint
-        ? this.geoPoints.find(x => x.startPoint === this.evidence.startPoint).endPoints
-        : []
+          ? this.geoPoints.find(x => x.startPoint === this.evidence.startPoint).endPoints
+          : []
       }
     }
   }
@@ -115,4 +127,13 @@
     margin: 40px 0 20px 0;
   }
 
+</style>
+<style>
+  .datepicker-custom {
+    min-width: 30em;
+    background-color: white;
+  }
+  .datepicker-wrapper > .vdp-date {
+
+  }
 </style>

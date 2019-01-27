@@ -7,7 +7,7 @@
               class="text-center">
       <div class="card-info">
         <li>
-        <b-badge variant="light">Kamieńczyk - Zakpane</b-badge>
+        <b-badge variant="light">{{evidence.startPoint}}- {{evidence.endPoint}}</b-badge>
         </li>
         <li>
         <b-badge variant="light">{{evidence.author}}</b-badge>

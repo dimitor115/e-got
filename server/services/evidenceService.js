@@ -13,6 +13,7 @@ class EvidenceService {
       startPoint: payload.startPoint,
       endPoint: payload.endPoint,
       approved: null,
+      trackDate: payload.trackDate,
       additionDate: Date()
     }
     const result = await mongo.evidences.insertOne(evidence)
@@ -49,7 +50,7 @@ class EvidenceService {
 
   turistEvidences() {
     console.log("-> turist evidence")
-    return mongo.evidences.find({}).toArray() //TODO: dodać punkty dla odcinka
+    return mongo.evidences.find({}).toArray()
   }
 
   getOne(req, res) {
