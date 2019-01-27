@@ -8,7 +8,8 @@
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production node server/index.js",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "test": "mocha"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.0.0",
@@ -27,6 +28,7 @@
     "vuejs-datepicker": "^1.5.4"
   },
   "devDependencies": {
+    "mocha": "^5.2.0",
     "node-sass": "^4.11.0",
     "nodemon": "^1.11.0",
     "sass-loader": "^7.1.0",
