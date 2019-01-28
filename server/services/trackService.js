@@ -1,7 +1,12 @@
+/**
+ * This module realize logic of tracks data abstraction
+ * @module Track-Service
+ * **/
 const mongo = require('../mongoDB.js')
 
 class TracksService {
 
+  /** @function add **/
   async add(req) {
     console.log('->add Track')
     const payload = req.body

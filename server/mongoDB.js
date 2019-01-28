@@ -1,3 +1,7 @@
+/**
+ * This module create connection to mongo db and create client
+ * @module MongoService**/
+
 const mongo = require('mongodb')
 class MongoService {
   async connect() {
