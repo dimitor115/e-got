@@ -1,7 +1,12 @@
+/**
+ * This module realize logic of suggested routes data abstraction
+ * @module Routes-Service
+ * **/
 const mongo = require('../mongoDB.js')
 
 class RoutesService {
-  async getSuggestedRoutes(req, res) {
+  /** @function getSuggestedRoutes **/
+  async getSuggestedRoutes() {
     return mongo.routes.find({}).toArray()
   }
 }
