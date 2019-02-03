@@ -84,14 +84,21 @@
       ]
     }),
     methods: {
+      validForm() {
+        return this.evidence.startPoint && this.evidence.endPoint && this.evidence.trackDate && this.evidence.photo
+      },
       postTrackEvidence() {
-        this.isRequestProcessing = true
-        axios.post(`${apiUrl()}/evidences`, this.evidence)
-          .then(() => {
-            this.isRequestProcessing = false
-            this.$router.push('/turist/tracks-evidence')
-          })
-          .catch(err => alert(err))
+        if(this.validForm()) {
+          this.isRequestProcessing = true
+          axios.post(`${apiUrl()}/evidences`, this.evidence)
+            .then(() => {
+              this.isRequestProcessing = false
+              this.$router.push('/turist/tracks-evidence')
+            })
+            .catch(err => alert(err))
+        } else {
+          alert('Formularz nie jest kompletny !')
+        }
       },
       async readAndRenderPhoto(event) {
         const file = event.srcElement.files[0]

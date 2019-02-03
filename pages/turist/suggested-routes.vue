@@ -35,6 +35,7 @@
       </loader>
       <div v-else>
         Dla tej grupy górskiej nie mamy jeszcze propzycji tras :C
+        Wybierz inną grupę.
       </div>
     </template>
   </section>
